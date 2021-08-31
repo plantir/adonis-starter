@@ -4,7 +4,7 @@ Route.group(() => {
   Route.post("register", "AuthController.register");
   Route.post("login", "AuthController.login");
   Route.post("refresh", "AuthController.refresh");
-  Route.get("check", "AuthController.check").middleware("auth");
+  Route.get("info", "AuthController.info").middleware("auth");
 })
   .prefix("admin/auth")
   .namespace("Admin");

@@ -31,12 +31,12 @@ class AuthController {
     }
     return auth.withRefreshToken().generate(user, true);
   }
-  async check({ request, auth }) {
+  async info({ request, response, auth }) {
     let user = await auth.getUser();
     if (!user.is_verified) {
-      throw new Error("access denied");
+      return response.status(401).send("access denied");
     }
-    return true;
+    return { user };
   }
   async refresh({ request, auth }) {
     const { refreshToken } = request.post();
