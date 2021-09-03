@@ -4,5 +4,5 @@ Route.group(() => {
   Route.customResource("", "AttributeController");
 })
   .prefix("admin/attributes")
-  .namespace("Admin");
-//   .middleware("auth");
+  .namespace("Admin")
+  .middleware("auth");

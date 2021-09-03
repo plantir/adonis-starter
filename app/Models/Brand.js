@@ -3,10 +3,10 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use("BaseModel");
 
-class Attribute extends Model {
+class Brand extends Model {
   static get allowField() {
-    return ["name", "label", "en_label", "icon", "default"];
+    return ["title", "en_title"];
   }
 }
 
-module.exports = Attribute;
+module.exports = Brand;

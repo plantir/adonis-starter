@@ -14,9 +14,10 @@ class Product extends Model {
       "slug",
       "name",
       "description",
-      "category_id",
-      "category_ion",
-      "mainImage",
+      "en_name",
+      "en_description",
+      "brand_id",
+      "main_image",
       "images",
     ];
   }
@@ -24,7 +25,7 @@ class Product extends Model {
     return ["images"];
   }
   static listOption(qs) {
-    qs.withArray = ["category"];
+    qs.withArray = ["brand"];
     return super.listOption(qs);
   }
   async change_attribute(attributes) {
@@ -35,6 +36,9 @@ class Product extends Model {
         row.value = attributes.find(
           (item) => row.attribute_id == item.id
         ).value;
+        row.en_value = attributes.find(
+          (item) => row.attribute_id == item.id
+        ).en_value;
       }
     );
   }
@@ -49,19 +53,20 @@ class Product extends Model {
       let exist = attributes.find((attr) => attr.id == item.id);
       if (exist) {
         item.value = exist.pivot.value;
+        item.en_value = exist.pivot.en_value;
         item.selected = true;
       }
       return item;
     });
     this.attributes = result;
   }
-  category() {
-    return this.belongsTo("App/Models/Category");
+  brand() {
+    return this.belongsTo("App/Models/Brand");
   }
   attributes() {
     return this.belongsToMany("App/Models/Attribute")
       .pivotTable("product_attributes")
-      .withPivot(["value"]);
+      .withPivot(["value", "en_value"]);
   }
 }
 

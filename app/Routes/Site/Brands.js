@@ -1,8 +1,7 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use("BaseRoute");
 Route.group(() => {
-  Route.customResource("", "ProductController");
+  Route.get("", "BrandController.index");
 })
-  .prefix("admin/products")
-  .namespace("Admin")
-  .middleware("auth");
+  .prefix("brands")
+  .namespace("Site");
